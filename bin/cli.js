@@ -30,7 +30,7 @@ Goodbye!
         `));
       });
 
-      log(chalk.blue(`
+      const helpCEMsg = `
 The server has started.
 
 You can use curl to POST an event to the endpoint:
@@ -41,8 +41,16 @@ curl -X POST -d '{"hello": "world"}' \\
     -H'Ce-source: cloud-event-example' \\
     -H'Ce-type: dev.knative.example' \\
     -H'Ce-specversion: 1.0' \\
-    http://localhost:8080
-  `));
+    http://localhost:8080`;
+
+      const helpPlainHTTPMsg = `
+The server has started.
+
+You can use curl to invoke the function:
+
+curl http://localhost:8080`;
+
+      log(chalk.blue(func.length === 1 ? helpPlainHTTPMsg : helpCEMsg));
     });
   } catch (error) {
     log(chalk.redBright('Something went wrong'));
